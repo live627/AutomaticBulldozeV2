@@ -1,8 +1,0 @@
-obj/
-bin/
-
-!libs/Cities_Skylines/*
-
-*.suo
-*.user
-.vs/config/applicationhost.config
