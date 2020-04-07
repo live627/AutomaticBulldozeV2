@@ -7,7 +7,7 @@ using System.Text;
 using System.Xml;
 using ColossalFramework.Globalization;
 
-namespace AutomaticBulldozeV2.UI.Localization
+namespace AutomaticBulldozeV3.UI.Localization
 {
     public class LocalizationManager
     {

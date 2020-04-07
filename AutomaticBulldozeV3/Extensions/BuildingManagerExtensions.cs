@@ -1,6 +1,6 @@
 ﻿using ColossalFramework;
 
-namespace AutomaticBulldozeV2.Extensions
+namespace AutomaticBulldozeV3.Extensions
 {
     internal static class BuildingManagerExtensions
     {

@@ -2,7 +2,7 @@
 using ICities;
 using UnityEngine;
 
-namespace AutomaticBulldozeV2.UI
+namespace AutomaticBulldozeV3.UI
 {
     public class UILoadingExtension : LoadingExtensionBase
     {

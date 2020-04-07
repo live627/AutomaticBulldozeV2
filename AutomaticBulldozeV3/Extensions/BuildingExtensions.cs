@@ -2,7 +2,7 @@
 using ColossalFramework.Math;
 using UnityEngine;
 
-namespace AutomaticBulldozeV2.Extensions
+namespace AutomaticBulldozeV3.Extensions
 {
     internal static class BuildingExtensions
     {

@@ -1,9 +1,9 @@
-﻿using AutomaticBulldozeV2.UI.Localization;
+﻿using AutomaticBulldozeV3.UI.Localization;
 using ColossalFramework;
 using ColossalFramework.UI;
 using UnityEngine;
 
-namespace AutomaticBulldozeV2.UI
+namespace AutomaticBulldozeV3.UI
 {
     public class UIAutoBulldozerPanel : UIPanel
     {

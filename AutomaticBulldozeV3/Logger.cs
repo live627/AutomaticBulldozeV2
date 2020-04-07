@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace AutomaticBulldozeV2
+namespace AutomaticBulldozeV3
 {
     internal static class Logger
     {

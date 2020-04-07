@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using ICities;
 
-namespace AutomaticBulldozeV2
+namespace AutomaticBulldozeV3
 {
     public class ModIdentity : IUserMod
     {
-        public string Name => "Automatic Bulldoze v2";
+        public string Name => "Automatic Bulldoze v3";
 
         public string Description
         {

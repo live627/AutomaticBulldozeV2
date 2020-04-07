@@ -1,9 +1,9 @@
-﻿using AutomaticBulldozeV2.Extensions;
-using AutomaticBulldozeV2.UI;
+﻿using AutomaticBulldozeV3.Extensions;
+using AutomaticBulldozeV3.UI;
 using ColossalFramework;
 using ICities;
 
-namespace AutomaticBulldozeV2
+namespace AutomaticBulldozeV3
 {
     public class DestroyMonitor : ThreadingExtensionBase
     {

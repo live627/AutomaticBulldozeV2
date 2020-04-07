@@ -1,4 +1,4 @@
-namespace AutomaticBulldozeV2.UI.Localization
+namespace AutomaticBulldozeV3.UI.Localization
 {
     public static class LocalizationExtensions
     {
