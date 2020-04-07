@@ -1,19 +1,19 @@
-﻿using ColossalFramework;
+using ColossalFramework;
 
 namespace AutomaticBulldozeV3.Extensions
 {
     internal static class BuildingManagerExtensions
     {
-        private static uint _lastTickIndex;
-        private static bool _disasterResponseBuildingExist;
+        private static uint lastTickIndex;
+        private static bool disasterResponseBuildingExist;
 
         internal static bool DisasterResponseBuildingExist(this BuildingManager buildingManager)
         {
-            if (_lastTickIndex == Singleton<SimulationManager>.instance.m_currentTickIndex)
-                return _disasterResponseBuildingExist;
+            if (lastTickIndex == Singleton<SimulationManager>.instance.mcurrentTickIndex)
+                return disasterResponseBuildingExist;
             
-            _lastTickIndex = Singleton<SimulationManager>.instance.m_currentTickIndex;
-            _disasterResponseBuildingExist = false;
+            lastTickIndex = Singleton<SimulationManager>.instance.mcurrentTickIndex;
+            disasterResponseBuildingExist = false;
             var serviceBuildings = buildingManager.GetServiceBuildings(ItemClass.Service.Disaster);
             if (serviceBuildings.m_buffer != null && serviceBuildings.m_size <= serviceBuildings.m_buffer.Length)
             {
@@ -27,7 +27,7 @@ namespace AutomaticBulldozeV3.Extensions
                     break;
                 }
             }
-            return _disasterResponseBuildingExist;
+            return disasterResponseBuildingExist;
         }
     }
 }

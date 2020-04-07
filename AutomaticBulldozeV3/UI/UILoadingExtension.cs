@@ -6,32 +6,32 @@ namespace AutomaticBulldozeV3.UI
 {
     public class UILoadingExtension : LoadingExtensionBase
     {
-        private LoadMode _mode;
-        private UIAutoBulldozerPanel _autoBulldozerPanel;
+        private LoadMode mode;
+        private UIAutoBulldozerPanel autoBulldozerPanel;
 
         private void InitWindows()
         {
             var bulldozerBar = UIView.Find("BulldozerBar");
-            _autoBulldozerPanel = bulldozerBar.AddUIComponent<UIAutoBulldozerPanel>();
-            _autoBulldozerPanel.relativePosition = new Vector3(10.0f, -20.0f);
+            autoBulldozerPanel = bulldozerBar.AddUIComponent<UIAutoBulldozerPanel>();
+            autoBulldozerPanel.relativePosition = new Vector3(10.0f, -20.0f);
         }
 
         public override void OnLevelLoaded(LoadMode mode)
         {
             if (mode != LoadMode.LoadGame && mode != LoadMode.NewGame)
                 return;
-            _mode = mode;
+            mode = mode;
 
             InitWindows();
         }
 
         public override void OnLevelUnloading()
         {
-            if (_mode != LoadMode.LoadGame && _mode != LoadMode.NewGame)
+            if (mode != LoadMode.LoadGame && mode != LoadMode.NewGame)
                 return;
 
-            if (_autoBulldozerPanel != null)
-                Object.Destroy(_autoBulldozerPanel);
+            if (autoBulldozerPanel != null)
+                Object.Destroy(autoBulldozerPanel);
         }
     }
 }

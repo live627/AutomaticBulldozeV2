@@ -7,8 +7,8 @@ namespace AutomaticBulldozeV3.UI
 {
     public class UIAutoBulldozerPanel : UIPanel
     {
-        private UIButton _demolishAbandonedButton;
-        private UIButton _demolishBurnedButton;
+        private UIButton demolishAbandonedButton;
+        private UIButton demolishBurnedButton;
 
         public static readonly SavedBool DemolishAbandoned = new SavedBool("ModDemolishAbandoned", Settings.gameSettingsFile, true, true);
         public static readonly SavedBool DemolishBurned = new SavedBool("ModDemolishBurned", Settings.gameSettingsFile, true, true);
@@ -55,10 +55,10 @@ namespace AutomaticBulldozeV3.UI
         private void SetLocales()
         {
             var bWidth = LocalizationManager.GetButtonWidth();
-            _demolishAbandonedButton.text = "Switch.DemolishAbandoned".Translate();
-            _demolishAbandonedButton.width = bWidth;
-            _demolishBurnedButton.text = "Switch.DemolishBurned".Translate();
-            _demolishBurnedButton.width = bWidth;
+            demolishAbandonedButton.text = "Switch.DemolishAbandoned".Translate();
+            demolishAbandonedButton.width = bWidth;
+            demolishBurnedButton.text = "Switch.DemolishBurned".Translate();
+            demolishBurnedButton.width = bWidth;
         }
 
         public override void Start()
@@ -70,29 +70,29 @@ namespace AutomaticBulldozeV3.UI
             autoLayoutPadding = new RectOffset(0, 10, 0, 0);
             autoLayoutStart = LayoutStart.TopLeft;
 
-            _demolishAbandonedButton = AddUIComponent<UIButton>();
-            _demolishAbandonedButton.width = 200;
-            _demolishAbandonedButton.height = 50;
-            InitButton(_demolishAbandonedButton);
-            _demolishAbandonedButton.eventClick += (component, param) =>
+            demolishAbandonedButton = AddUIComponent<UIButton>();
+            demolishAbandonedButton.width = 200;
+            demolishAbandonedButton.height = 50;
+            InitButton(demolishAbandonedButton);
+            demolishAbandonedButton.eventClick += (component, param) =>
             {
                 DemolishAbandoned.value = !DemolishAbandoned.value;
-                UpdateCheckButton(_demolishAbandonedButton, DemolishAbandoned.value);
+                UpdateCheckButton(demolishAbandonedButton, DemolishAbandoned.value);
             };
 
-            _demolishBurnedButton = AddUIComponent<UIButton>();
+            demolishBurnedButton = AddUIComponent<UIButton>();
             
-            _demolishBurnedButton.width = 200;
-            _demolishBurnedButton.height = 50;
-            InitButton(_demolishBurnedButton);
-            _demolishBurnedButton.eventClick += (component, param) =>
+            demolishBurnedButton.width = 200;
+            demolishBurnedButton.height = 50;
+            InitButton(demolishBurnedButton);
+            demolishBurnedButton.eventClick += (component, param) =>
             {
                 DemolishBurned.value = !DemolishBurned.value;
-                UpdateCheckButton(_demolishBurnedButton, DemolishBurned.value);
+                UpdateCheckButton(demolishBurnedButton, DemolishBurned.value);
             };
 
-            UpdateCheckButton(_demolishAbandonedButton, DemolishAbandoned.value);
-            UpdateCheckButton(_demolishBurnedButton, DemolishBurned.value);
+            UpdateCheckButton(demolishAbandonedButton, DemolishAbandoned.value);
+            UpdateCheckButton(demolishBurnedButton, DemolishBurned.value);
 
             SetLocales();
             LocalizationManager.Instance.eventLocaleChanged += language => SetLocales();

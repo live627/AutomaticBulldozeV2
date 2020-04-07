@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,15 +13,15 @@ namespace AutomaticBulldozeV3.UI.Localization
     {
         private static readonly string DEFAULT_TRANSLATION_PREFIX = "lang";
 
-        private static LocalizationManager _instance;
-        private static string _language;
-        private readonly string _assemblyPath;
-        private static Dictionary<string, string> _translations;
+        private static LocalizationManager instance;
+        private static string language;
+        private readonly string assemblyPath;
+        private static Dictionary<string, string> translations;
 
         private LocalizationManager()
         {
-            _assemblyPath = $"{Assembly.GetExecutingAssembly().GetName().Name}.Resources.";
-            _translations = new Dictionary<string, string>();
+            assemblyPath = $"{Assembly.GetExecutingAssembly().GetName().Name}.Resources.";
+            translations = new Dictionary<string, string>();
 
             LoadTranslations(LocaleManager.instance.language);
         }
@@ -34,11 +34,11 @@ namespace AutomaticBulldozeV3.UI.Localization
         {
             get
             {
-                if (_instance == null)
+                if (instance == null)
                 {
-                    _instance = new LocalizationManager();
+                    instance = new LocalizationManager();
                 }
-                return _instance;
+                return instance;
             }
         }
 
@@ -62,7 +62,7 @@ namespace AutomaticBulldozeV3.UI.Localization
             var translatedFilename = filenameBuilder.ToString();
 
             var assembly = Assembly.GetExecutingAssembly();
-            if (assembly.GetManifestResourceNames().Contains(_assemblyPath + translatedFilename))
+            if (assembly.GetManifestResourceNames().Contains(assemblyPath + translatedFilename))
             {
                 return translatedFilename;
             }
@@ -74,11 +74,11 @@ namespace AutomaticBulldozeV3.UI.Localization
 
         private void LoadTranslations(string language)
         {
-            _language = language;
-            _translations.Clear();
+            language = language;
+            translations.Clear();
             try
             {
-                var filename = _assemblyPath + GetTranslatedFileName(language);
+                var filename = assemblyPath + GetTranslatedFileName(language);
                 string xml;
                 using (var rs = Assembly.GetExecutingAssembly().GetManifestResourceStream(filename))
                 {
@@ -101,7 +101,7 @@ namespace AutomaticBulldozeV3.UI.Localization
                     if (valueNode != null)
                         value = valueNode.InnerText;
 
-                    _translations.Add(name, value);
+                    translations.Add(name, value);
                 }
                 Logger.LogDebug(() => $"{filename} translations loaded.");
                 eventLocaleChanged?.Invoke(language);
@@ -117,7 +117,7 @@ namespace AutomaticBulldozeV3.UI.Localization
             string ret;
             try
             {
-                _translations.TryGetValue(key, out ret);
+                translations.TryGetValue(key, out ret);
             }
             catch (Exception e)
             {
@@ -131,7 +131,7 @@ namespace AutomaticBulldozeV3.UI.Localization
 
         public void CheckAndUpdateLocales()
         {
-            if (LocaleManager.instance.language != _language)
+            if (LocaleManager.instance.language != language)
             {
                 LoadTranslations(LocaleManager.instance.language);
             }
