@@ -14,13 +14,13 @@ namespace AutomaticBulldozeV3.UI.Localization
         private static readonly string DEFAULT_TRANSLATION_PREFIX = "lang";
 
         private static LocalizationManager instance;
-        private static string language;
         private readonly string assemblyPath;
         private static Dictionary<string, string> translations;
+        private Assembly assembly = Assembly.GetExecutingAssembly();
 
         private LocalizationManager()
         {
-            assemblyPath = $"{Assembly.GetExecutingAssembly().GetName().Name}.Resources.";
+            assemblyPath = $"{assembly.GetName().Name}.Resources.";
             translations = new Dictionary<string, string>();
 
             LoadTranslations(LocaleManager.instance.language);
@@ -61,11 +61,8 @@ namespace AutomaticBulldozeV3.UI.Localization
 
             var translatedFilename = filenameBuilder.ToString();
 
-            var assembly = Assembly.GetExecutingAssembly();
             if (assembly.GetManifestResourceNames().Contains(assemblyPath + translatedFilename))
-            {
                 return translatedFilename;
-            }
 
             if (language != null && !"en".Equals(language))
                 Logger.LogWarning($"Translated file {translatedFilename} not found!");
@@ -74,13 +71,12 @@ namespace AutomaticBulldozeV3.UI.Localization
 
         private void LoadTranslations(string language)
         {
-            language = language;
             translations.Clear();
             try
             {
                 var filename = assemblyPath + GetTranslatedFileName(language);
                 string xml;
-                using (var rs = Assembly.GetExecutingAssembly().GetManifestResourceStream(filename))
+                using (var rs = assembly.GetManifestResourceStream(filename))
                 {
                     using (var sr = new StreamReader(rs))
                     {

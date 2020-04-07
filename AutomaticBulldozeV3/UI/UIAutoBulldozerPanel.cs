@@ -1,4 +1,4 @@
-﻿using AutomaticBulldozeV3.UI.Localization;
+using AutomaticBulldozeV3.UI.Localization;
 using ColossalFramework;
 using ColossalFramework.UI;
 using UnityEngine;
@@ -15,13 +15,11 @@ namespace AutomaticBulldozeV3.UI
 
         private static void InitButton(UIButton button)
         {
-            var sprite = "SubBarButtonBase";
-            var spriteHov = sprite + "Hovered";
-            button.normalBgSprite = spriteHov;
-            button.disabledBgSprite = spriteHov;
-            button.hoveredBgSprite = spriteHov;
-            button.focusedBgSprite = spriteHov;
-            button.pressedBgSprite = sprite + "Pressed";
+            button.normalBgSprite = "SubBarButtonBaseHovered";
+            button.disabledBgSprite = "SubBarButtonBaseHovered";
+            button.hoveredBgSprite = "SubBarButtonBaseHovered";
+            button.focusedBgSprite = "SubBarButtonBaseHovered";
+            button.pressedBgSprite = "SubBarButtonBasePressed";
             button.textColor = new Color32(255, 255, 255, 255);
         }
 

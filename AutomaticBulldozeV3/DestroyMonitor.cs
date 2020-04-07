@@ -34,20 +34,17 @@ namespace AutomaticBulldozeV3
             if (ItemClass.GetPublicServiceIndex(building.Info.m_class.m_service) != -1)
                 coverageManager.CoverageUpdated(building.Info.m_class.m_service, building.Info.m_class.m_subService, building.Info.m_class.m_level);
         }
-        
+
+        private bool CanDemolish(ref Building building) =>
+            (UIAutoBulldozerPanel.DemolishAbandoned && (building.m_flags & Building.Flags.Abandoned) != Building.Flags.None)
+               || (UIAutoBulldozerPanel.DemolishBurned && (building.m_flags & Building.Flags.BurnedDown) != Building.Flags.None);
+
         public override void OnAfterSimulationTick()
         {
-            for (ushort i = (ushort)(simulationManager.m_currentTickIndex % 1000); i < buildingManager.m_buildings.m_buffer.Length; i+=1000)
-            {
-                if (buildingManager.m_buildings.m_buffer[i].m_flags == Building.Flags.None)
-                    continue;
-
-                if ((UIAutoBulldozerPanel.DemolishAbandoned && (buildingManager.m_buildings.m_buffer[i].m_flags & Building.Flags.Abandoned) != Building.Flags.None)
-                    || (UIAutoBulldozerPanel.DemolishBurned && !buildingManager.DisasterResponseBuildingExist() && (buildingManager.m_buildings.m_buffer[i].m_flags & Building.Flags.BurnedDown) != Building.Flags.None))
-                {
-                    DeleteBuildingImpl(ref i, ref buildingManager.m_buildings.m_buffer[i]);
-                }
-            }
+            if (!simulationManager.SimulationPaused)
+                for (ushort i = (ushort)(simulationManager.m_currentTickIndex % 1000); i < buildingManager.m_buildings.m_buffer.Length; i += 1000)
+                    if (CanDemolish(ref buildingManager.m_buildings.m_buffer[i]))
+                        DeleteBuildingImpl(ref i, ref buildingManager.m_buildings.m_buffer[i]);
         }
     }
 }
