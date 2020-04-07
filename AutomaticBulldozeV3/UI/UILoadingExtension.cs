@@ -8,7 +8,8 @@ namespace AutomaticBulldozeV3.UI
     {
         public override void OnLevelLoaded(LoadMode mode)
         {
-            if (mode != LoadMode.LoadGame && mode != LoadMode.NewGame)
+            if (mode != LoadMode.LoadGame && mode != LoadMode.NewGame &&
+                mode != LoadMode.LoadScenario && mode != LoadMode.NewGameFromScenario)
                 return;
 
             UIComponent bulldozerBar = UIView.Find("BulldozerBar");
