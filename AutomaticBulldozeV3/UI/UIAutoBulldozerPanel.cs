@@ -64,13 +64,13 @@ namespace AutomaticBulldozeV3.UI
         public override void Start()
         {
             // configure panel
-            this.height = 50;
-            this.autoLayout = true;
-            this.autoLayoutDirection = LayoutDirection.Horizontal;
-            this.autoLayoutPadding = new RectOffset(0, 10, 0, 0);
-            this.autoLayoutStart = LayoutStart.TopLeft;
+            height = 50;
+            autoLayout = true;
+            autoLayoutDirection = LayoutDirection.Horizontal;
+            autoLayoutPadding = new RectOffset(0, 10, 0, 0);
+            autoLayoutStart = LayoutStart.TopLeft;
 
-            _demolishAbandonedButton = this.AddUIComponent<UIButton>();
+            _demolishAbandonedButton = AddUIComponent<UIButton>();
             _demolishAbandonedButton.width = 200;
             _demolishAbandonedButton.height = 50;
             InitButton(_demolishAbandonedButton);
@@ -80,7 +80,7 @@ namespace AutomaticBulldozeV3.UI
                 UpdateCheckButton(_demolishAbandonedButton, DemolishAbandoned.value);
             };
 
-            _demolishBurnedButton = this.AddUIComponent<UIButton>();
+            _demolishBurnedButton = AddUIComponent<UIButton>();
             
             _demolishBurnedButton.width = 200;
             _demolishBurnedButton.height = 50;

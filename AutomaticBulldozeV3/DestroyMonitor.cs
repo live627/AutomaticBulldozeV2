@@ -15,11 +15,11 @@ namespace AutomaticBulldozeV3
 
         public DestroyMonitor()
         {
-            this._buildingManager = Singleton<BuildingManager>.instance;
-            this._simulationManager = Singleton<SimulationManager>.instance;
-            this._economyManager = Singleton<EconomyManager>.instance;
-            this._coverageManager = Singleton<CoverageManager>.instance;
-            this._nullAudioGroup = new AudioGroup(0, new SavedFloat("NOTEXISTINGELEMENT", Settings.gameSettingsFile, 0, false));
+            _buildingManager = Singleton<BuildingManager>.instance;
+            _simulationManager = Singleton<SimulationManager>.instance;
+            _economyManager = Singleton<EconomyManager>.instance;
+            _coverageManager = Singleton<CoverageManager>.instance;
+            _nullAudioGroup = new AudioGroup(0, new SavedFloat("NOTEXISTINGELEMENT", Settings.gameSettingsFile, 0, false));
         }
 
         private void DeleteBuildingImpl(ref ushort buildingId, ref Building building)
@@ -45,7 +45,7 @@ namespace AutomaticBulldozeV3
                 if ((UIAutoBulldozerPanel.DemolishAbandoned && (_buildingManager.m_buildings.m_buffer[i].m_flags & Building.Flags.Abandoned) != Building.Flags.None)
                     || (UIAutoBulldozerPanel.DemolishBurned && !_buildingManager.DisasterResponseBuildingExist() && (_buildingManager.m_buildings.m_buffer[i].m_flags & Building.Flags.BurnedDown) != Building.Flags.None))
                 {
-                    this.DeleteBuildingImpl(ref i, ref _buildingManager.m_buildings.m_buffer[i]);
+                    DeleteBuildingImpl(ref i, ref _buildingManager.m_buildings.m_buffer[i]);
                 }
             }
         }
