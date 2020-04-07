@@ -1,12 +1,14 @@
-using AutomaticBulldozeV3.UI.Localization;
+﻿using AutomaticBulldozeV3.UI.Localization;
 using ColossalFramework;
 using ColossalFramework.UI;
+using System.Reflection;
 using UnityEngine;
 
 namespace AutomaticBulldozeV3.UI
 {
     public class UIAutoBulldozerPanel : UIPanel
     {
+        private readonly LocalizationManager localization = LocalizationManager.Instance;
         private UIButton demolishAbandonedButton;
         private UIButton demolishBurnedButton;
 
@@ -52,25 +54,27 @@ namespace AutomaticBulldozeV3.UI
 
         private void SetLocales()
         {
-            var bWidth = LocalizationManager.GetButtonWidth();
-            demolishAbandonedButton.text = "Switch.DemolishAbandoned".Translate();
-            demolishAbandonedButton.width = bWidth;
-            demolishBurnedButton.text = "Switch.DemolishBurned".Translate();
-            demolishBurnedButton.width = bWidth;
+            demolishAbandonedButton.text = localization.GetString("Switch.DemolishAbandoned");
+            MethodInfo m = typeof(UIButton).GetMethod("AutoSize", BindingFlags.NonPublic | BindingFlags.Instance);
+            m.Invoke(demolishAbandonedButton, null);
+            demolishAbandonedButton.width = demolishAbandonedButton.width + 30;
+            demolishAbandonedButton.height = 40;
+            demolishBurnedButton.text = localization.GetString("Switch.DemolishBurned");
+            m.Invoke(demolishBurnedButton, null);
+            demolishBurnedButton.width = demolishBurnedButton.width + 30;
+            demolishBurnedButton.height = 40;
         }
 
         public override void Start()
         {
             // configure panel
-            height = 50;
+            height = 40;
             autoLayout = true;
             autoLayoutDirection = LayoutDirection.Horizontal;
             autoLayoutPadding = new RectOffset(0, 10, 0, 0);
             autoLayoutStart = LayoutStart.TopLeft;
 
             demolishAbandonedButton = AddUIComponent<UIButton>();
-            demolishAbandonedButton.width = 200;
-            demolishAbandonedButton.height = 50;
             InitButton(demolishAbandonedButton);
             demolishAbandonedButton.eventClick += (component, param) =>
             {

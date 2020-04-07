@@ -124,34 +124,5 @@ namespace AutomaticBulldozeV3.UI.Localization
                 return key;
             return ret;
         }
-
-        public void CheckAndUpdateLocales()
-        {
-            if (LocaleManager.instance.language != language)
-            {
-                LoadTranslations(LocaleManager.instance.language);
-            }
-        }
-
-        internal static int GetButtonWidth()
-        {
-            switch (LocaleManager.instance.language)
-            {
-                case null:
-                case "fr":
-                case "en":
-                default:
-                    return 200;
-                case "pr":
-                case "de":
-                case "pt":
-                    return 210;
-                case "es":
-                    return 215;
-                case "ru":
-                case "pl":
-                    return 220;
-            }
-        }
     }
 }

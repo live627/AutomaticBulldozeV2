@@ -1,4 +1,4 @@
-﻿using ColossalFramework.UI;
+using ColossalFramework.UI;
 using ICities;
 using UnityEngine;
 
@@ -13,7 +13,7 @@ namespace AutomaticBulldozeV3.UI
 
             UIComponent bulldozerBar = UIView.Find("BulldozerBar");
             UIAutoBulldozerPanel autoBulldozerPanel = bulldozerBar.AddUIComponent<UIAutoBulldozerPanel>();
-            autoBulldozerPanel.relativePosition = new Vector3(10.0f, -20.0f);
+            autoBulldozerPanel.relativePosition = new Vector3(10.0f, -10.0f);
         }
     }
 }
