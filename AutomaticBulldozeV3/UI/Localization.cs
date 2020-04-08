@@ -7,9 +7,9 @@ using System.Text;
 using System.Xml;
 using ColossalFramework.Globalization;
 
-namespace AutomaticBulldozeV3.UI.Localization
+namespace AutomaticBulldozeV3.UI
 {
-    public class LocalizationManager
+    public class Localization
     {
         private static readonly string DEFAULT_TRANSLATION_PREFIX = "lang";
 
