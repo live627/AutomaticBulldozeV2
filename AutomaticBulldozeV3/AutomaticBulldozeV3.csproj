@@ -1,11 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net35</TargetFrameworks>
-    <Description></Description>
-    <Product>Automatic Bulldoze V3</Product>
-    <Authors>Yury Shcherbakov</Authors>
-    <Version>2.1.7.3</Version>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Deterministic>false</Deterministic>
     <PackageId />
     <PostBuildEvent>
       mkdir "%LOCALAPPDATA%\Colossal Order\Cities_Skylines\Addons\Mods\$(MSBuildProjectName)"
