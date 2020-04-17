@@ -13,12 +13,12 @@ namespace AutomaticBulldozeV3.UI
     {
         private static readonly string DEFAULT_TRANSLATION_PREFIX = "lang";
 
-        private static LocalizationManager instance;
+        private static Localization instance;
         private readonly string assemblyPath;
         private static Dictionary<string, string> translations;
         private Assembly assembly = Assembly.GetExecutingAssembly();
 
-        private LocalizationManager()
+        private Localization()
         {
             assemblyPath = $"{assembly.GetName().Name}.Resources.";
             translations = new Dictionary<string, string>();
@@ -30,13 +30,13 @@ namespace AutomaticBulldozeV3.UI
 
         public event LocaleChangedEventHandler eventLocaleChanged;
 
-        public static LocalizationManager Instance
+        public static Localization Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new LocalizationManager();
+                    instance = new Localization();
                 }
                 return instance;
             }

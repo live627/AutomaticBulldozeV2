@@ -1,5 +1,4 @@
-﻿using AutomaticBulldozeV3.UI.Localization;
-using ColossalFramework;
+﻿using ColossalFramework;
 using ColossalFramework.UI;
 using System.Reflection;
 using UnityEngine;
@@ -8,14 +7,14 @@ namespace AutomaticBulldozeV3.UI
 {
     public class UIAutoBulldozerPanel : UIPanel
     {
-        private readonly LocalizationManager localization = LocalizationManager.Instance;
+        private readonly Localization localization = Localization.Instance;
         private UIButton demolishAbandonedButton;
         private UIButton demolishBurnedButton;
 
         public static readonly SavedBool DemolishAbandoned = new SavedBool("ModDemolishAbandoned", Settings.gameSettingsFile, true, true);
         public static readonly SavedBool DemolishBurned = new SavedBool("ModDemolishBurned", Settings.gameSettingsFile, true, true);
 
-        private static void InitButton(UIButton button)
+        private void InitButton(UIButton button)
         {
             button.normalBgSprite = "SubBarButtonBaseHovered";
             button.disabledBgSprite = "SubBarButtonBaseHovered";
@@ -97,7 +96,7 @@ namespace AutomaticBulldozeV3.UI
             UpdateCheckButton(demolishBurnedButton, DemolishBurned.value);
 
             SetLocales();
-            LocalizationManager.Instance.eventLocaleChanged += language => SetLocales();
+            Localization.Instance.eventLocaleChanged += language => SetLocales();
             
             base.Start();
         }
