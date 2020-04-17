@@ -4,7 +4,9 @@ namespace AutomaticBulldozeV3
 {
     public class ModIdentity : IUserMod
     {
-        public string Name => $"Automatic Bulldoze (v{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version})";
+        private static System.Reflection.AssemblyName Asm => System.Reflection.Assembly.GetExecutingAssembly().GetName();
+
+        public string Name => $"{Asm.Name}(v{Asm.Version})";
 
         public string Description
         {
