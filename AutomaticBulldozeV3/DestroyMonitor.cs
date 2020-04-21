@@ -12,6 +12,7 @@ namespace AutomaticBulldozeV3
         private readonly EconomyManager economyManager;
         private readonly CoverageManager coverageManager;
         private readonly AudioGroup nullAudioGroup;
+        private bool disasterResponseBuildingExist;
 
         public DestroyMonitor()
         {
@@ -21,6 +22,40 @@ namespace AutomaticBulldozeV3
             coverageManager = Singleton<CoverageManager>.instance;
             nullAudioGroup = new AudioGroup(0, new SavedFloat("NOTEXISTINGELEMENT", Settings.gameSettingsFile, 0, false));
         }
+
+        public override void OnCreated(IThreading threading)
+        {
+            disasterResponseBuildingExist = HasDisasterResponseBuilding();
+            buildingManager.EventBuildingCreated += OnBuildingCreated;
+            buildingManager.EventBuildingReleased += OnBuildingReleased;
+            base.OnCreated(threading);
+        }
+
+        private bool HasDisasterResponseBuilding()
+        {
+            var serviceBuildings = buildingManager.GetServiceBuildings(ItemClass.Service.Disaster);
+            for (var index = 0; index < serviceBuildings.m_size; ++index)
+            {
+                Building building = buildingManager.m_buildings.m_buffer[serviceBuildings.m_buffer[index]];
+                if (IsDisasterResponseBuilding(ref building))
+                    return true;
+            }
+            return false;
+        }
+
+        public override void OnReleased()
+        {
+            buildingManager.EventBuildingCreated -= OnBuildingCreated;
+            buildingManager.EventBuildingReleased -= OnBuildingReleased;
+            base.OnReleased();
+        }
+
+        private static bool IsDisasterResponseBuilding(ref Building building) =>
+            building.Info.m_buildingAI is DisasterResponseBuildingAI && (building.m_flags & Building.Flags.Completed) != Building.Flags.None;
+
+        private void OnBuildingCreated(ushort id) => disasterResponseBuildingExist |= IsDisasterResponseBuilding(ref buildingManager.m_buildings.m_buffer[id]);
+
+        private void OnBuildingReleased(ushort id) => disasterResponseBuildingExist = HasDisasterResponseBuilding();
 
         private void DeleteBuildingImpl(ref ushort buildingId, ref Building building)
         {
