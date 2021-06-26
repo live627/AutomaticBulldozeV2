@@ -5,7 +5,7 @@ namespace AutomaticBulldozeV3
 {
     internal static class Logger
     {
-        private const string Prefix = "Automatic Bulldoze V2: ";
+        private const string Prefix = "Automatic Bulldoze v3: ";
 
         [System.Diagnostics.Conditional("DEBUG")]
         public static void LogDebug(Func<string> acquire)
